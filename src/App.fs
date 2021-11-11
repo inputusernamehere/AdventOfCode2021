@@ -28,7 +28,71 @@ let temp2 = DegreesC 37.0
 let printTemp = function
    | DegreesC t -> printfn "%f degC" t
    | DegreesF t -> printfn "%f degF" t
-  """.Trim() 
+  """.Trim()
+
+let dayBox (i : string) =
+  Html.div [
+    Html.p i
+  ]
+
+let dayBoxes () =
+  [ 1 .. 25 ]
+  |> List.map (string >> dayBox)
+
+let dayView () =
+  Html.div [
+    prop.children (dayBoxes())
+  ]
+
+let inputView () =
+  Html.form [
+    Bulma.field.div [
+      Bulma.label "Label"
+      Bulma.control.div [
+        Bulma.input.text [
+          prop.required true
+          prop.placeholder "Placeholder"
+        ]
+      ]
+    ]
+    Bulma.field.div [
+      field.isGrouped
+      field.isGroupedCentered
+      prop.children [
+        Bulma.control.div [
+          Bulma.button.button [
+            color.isLink
+            prop.text "Submit"
+          ]
+        ]
+      ]
+    ]
+  ]
+
+let tabbedView () =
+  Bulma.tabs [
+    tabs.isBoxed
+    prop.children [
+      Html.ul [
+        Bulma.tab [
+          tab.isActive
+          prop.children [
+            Html.a [
+              prop.text "Run Code"
+              prop.href "#"
+            ]
+          ]
+        ]
+
+        Bulma.tab [
+          Html.a [
+            prop.text "View Code"
+            prop.href "#"
+          ]
+        ]
+      ]
+    ]
+  ]
 
 let App = FunctionComponent.Of<unit> (fun model ->
   let state = Hooks.useState model
@@ -49,6 +113,12 @@ let App = FunctionComponent.Of<unit> (fun model ->
               Html.text codeSnippet
             ]
           ]
+
+          tabbedView ()
+
+          inputView ()
+
+          dayView ()
         ]
       ]
     ]
