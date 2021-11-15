@@ -10,6 +10,7 @@ open Feliz.Bulma
 open Feliz.Bulma.Operators
 open Feliz.Router
 open Fss
+open Fss.FssTypes
 open Browser.Dom
 
 open SyntaxHighlighterWrapper
@@ -30,18 +31,44 @@ let printTemp = function
    | DegreesF t -> printfn "%f degF" t
   """.Trim()
 
-let dayBox (i : string) =
-  Html.div [
-    Html.p i
-  ]
+let dayBoxStyle = fss [
+  Height.value (px 40)
+  Width.value (px 40)
+]
 
-let dayBoxes () =
-  [ 1 .. 25 ]
-  |> List.map (string >> dayBox)
+let dayView (changeDayFn : int -> unit) (currentDay : int) =
+  let dayBox (i : int) =
+    let color () =
+      if currentDay = i
+      then color.isInfo
+      else color.isWhite
+    Bulma.button.button [
+      prop.className dayBoxStyle
+      color ()
 
-let dayView () =
+      prop.text (string i)
+
+      prop.onClick <| fun _ -> changeDayFn i
+    ]
+
+  let dayBoxes () =
+    [ 1 .. 25 ]
+    |> List.map dayBox
+
   Html.div [
-    prop.children (dayBoxes())
+    prop.style [
+      style.display.flex
+      style.flexWrap.wrap
+    ]
+    prop.children [
+      Bulma.subtitle [
+        prop.text "Choose a day:"
+      ]
+
+      Html.div [
+        prop.children (dayBoxes ())
+      ]
+    ]
   ]
 
 let inputView () =
@@ -94,8 +121,21 @@ let tabbedView () =
     ]
   ]
 
-let App = FunctionComponent.Of<unit> (fun model ->
+type AppState = {
+  Day : int
+}
+
+let App = FunctionComponent.Of<AppState> (fun model ->
   let state = Hooks.useState model
+
+  let changeDay n =
+    let newValue =
+      match n with
+      | x when x < 0 -> 0
+      | x when x > 25 -> 25
+      | x -> x
+
+    state.update { state.current with Day = newValue }
 
   Bulma.section [
     prop.children [
@@ -103,22 +143,13 @@ let App = FunctionComponent.Of<unit> (fun model ->
         prop.children [
           Bulma.title "Advent of Code 2021"
 
-          SyntaxHighlighter.input [
-            SyntaxHighlighter.language "fsharp"
-            SyntaxHighlighter.showLineNumbers true
+          dayView changeDay state.current.Day
 
-            SyntaxHighlighter.style SyntaxHighlighterWrapper.vs2015
-
-            prop.children [
-              Html.text codeSnippet
-            ]
-          ]
+          fsSnippet codeSnippet
 
           tabbedView ()
 
           inputView ()
-
-          dayView ()
         ]
       ]
     ]
@@ -127,7 +158,7 @@ let App = FunctionComponent.Of<unit> (fun model ->
 
 let render() =
   ReactDom.render(
-    App (),
+    App { Day = 1 },
     document.getElementById("ReactEntryPoint"))
 
 render()
