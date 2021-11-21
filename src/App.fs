@@ -13,62 +13,13 @@ open Fss
 open Fss.FssTypes
 open Browser.Dom
 
+open Problem
 open SyntaxHighlighterWrapper
 
 type Tab =
   | Code
   | Problem
   | Explanation
-
-let problem1 =
-  """
---- Day 1: Report Repair ---
-
-After saving Christmas five years in a row, you've decided to take a vacation at a nice resort on a tropical island. Surely, Christmas will go on without you.
-
-The tropical island has its own currency and is entirely cash-only. The gold coins used there have a little picture of a starfish; the locals just call them stars. None of the currency exchanges seem to have heard of them, but somehow, you'll need to find fifty of these coins by the time you arrive so you can pay the deposit on your room.
-
-To save your vacation, you need to get all fifty stars by December 25th.
-
-Collect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!
-
-Before you leave, the Elves in accounting just need you to fix your expense report (your puzzle input); apparently, something isn't quite adding up.
-
-Specifically, they need you to find the two entries that sum to 2020 and then multiply those two numbers together.
-
-For example, suppose your expense report contained the following:
-
-1721
-979
-366
-299
-675
-1456
-
-In this list, the two entries that sum to 2020 are 1721 and 299. Multiplying them together produces 1721 * 299 = 514579, so the correct answer is 514579.
-
-Of course, your expense report is much larger. Find the two entries that sum to 2020; what do you get if you multiply them together?
-
-To play, please identify yourself via one of these services:
-  """
-
-let codeSnippet =
-  """
-type Temp =
-    | DegreesC of float
-    | DegreesF of float
-
-// Use one of the cases to create one
-let temp1 = DegreesF 98.6
-let temp2 = DegreesC 37.0
-
-// Pattern match on all cases to unpack
-let printTemp = function
-   | DegreesC t -> printfn "%f degC" t
-   | DegreesF t -> printfn "%f degF" t
-
-let longLine = 126734926138632316461268123868123423486123468123468123462738462183746723468723461283462134
-  """.Trim()
 
 let dayBoxStyle = fss [
   Height.value (px 40)
@@ -116,7 +67,7 @@ let dayView (changeDayFn : int -> unit) (currentDay : int) =
 let inputView () =
   Html.form [
     Bulma.field.div [
-      Bulma.label "Run your code"
+      Bulma.label "Run code"
       Bulma.control.div [
         Bulma.input.text [
           prop.required true
@@ -138,7 +89,7 @@ let inputView () =
     ]
   ]
 
-let codeView () =
+let codeView (problem : Problem option) =
   Html.div [
     prop.style [ style.display.flex ]
     prop.children [
@@ -161,10 +112,42 @@ let codeView () =
         ]
 
         prop.children [
-          fsSnippet codeSnippet
+          match problem with
+          | Some p -> fsSnippet p.Part1Code
+          | None -> ()
         ]
       ]
     ]
+  ]
+
+let problemView (problem : Problem option) =
+  let problemStatement =
+    match problem with
+    | Some p -> p.Part1Problem
+    | None -> ""
+
+  Html.div [
+    prop.style [
+      style.whitespace.prewrap
+      style.backgroundColor "#f4f5f8"
+    ]
+
+    prop.text problemStatement
+  ]
+
+let explanationView (problem : Problem option) =
+  let explanation =
+    match problem with
+    | Some p -> p.Part1Explanation
+    | None -> ""
+
+  Html.div [
+    prop.style [
+      style.whitespace.prewrap
+      style.backgroundColor "#f4f5f8"
+    ]
+
+    prop.text explanation
   ]
 
 let tabView (changeTab : Tab -> unit) (currentTab : Tab) =
@@ -225,6 +208,14 @@ let App = FunctionComponent.Of<AppState> (fun model ->
   let changeTab t =
     state.update { state.current with Tab = t }
 
+  let problems =
+    Map.empty
+      .Add (Example.example.Day, Example.example)
+
+  let currentProblem () =
+    problems
+    |> Map.tryFind state.current.Day
+
   Bulma.section [
     prop.children [
       Bulma.container [
@@ -236,16 +227,9 @@ let App = FunctionComponent.Of<AppState> (fun model ->
           tabView changeTab state.current.Tab
 
           match state.current.Tab with
-          | Code -> codeView ()
-          | Problem ->
-            Html.div [
-              prop.style [
-                style.whitespace.prewrap
-                style.backgroundColor "#f4f5f8"
-              ]
-              prop.text problem1
-            ]
-          | Explanation -> ()
+          | Code -> codeView (currentProblem ())
+          | Problem -> problemView (currentProblem ())
+          | Explanation -> explanationView (currentProblem ())
         ]
       ]
     ]

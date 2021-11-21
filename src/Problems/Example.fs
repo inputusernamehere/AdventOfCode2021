@@ -22,6 +22,16 @@ let part1Solution (input : string) =
   |> fun a -> (a.[0] + a.[1])
   |> string
 
+let part1Code =
+  """
+let part1Solution (input : string) =
+  input.Split(' ')
+  |> Array.map int
+  |> fun a -> (a.[0] + a.[1])
+  |> string
+  """
+    .Trim()
+
 let part2Problem =
   """
 Multiply two numbers together.
@@ -40,11 +50,24 @@ let part2Solution (input : string) =
   |> fun a -> (a.[0] * a.[1])
   |> string
 
-let day1 = {
+let part2Code =
+  """
+let part2Solution (input : string) =
+  input.Split(' ')
+  |> Array.map int
+  |> fun a -> (a.[0] * a.[1])
+  |> string
+  """
+    .Trim()
+
+let example = {
   Day = 1
 
   Part1Solution = part1Solution
   Part2Solution = part2Solution
+
+  Part1Code = part1Code
+  Part2Code = part2Code
 
   Part1Problem = part1Problem
   Part2Problem = part2Problem
