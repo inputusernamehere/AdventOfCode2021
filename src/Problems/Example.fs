@@ -40,7 +40,7 @@ Multiply two numbers together.
 
 let part2Explanation =
   """
-2 + 2 = 4
+2 * 2 = 4
   """
     .Trim()
 
