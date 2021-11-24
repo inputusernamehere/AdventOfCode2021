@@ -64,33 +64,63 @@ let dayView (changeDayFn : int -> unit) (currentDay : int) =
     ]
   ]
 
-let inputView () =
-  Html.form [
-    Bulma.field.div [
-      Bulma.label "Run code"
-      Bulma.control.div [
-        Bulma.input.text [
-          prop.required true
-          prop.placeholder "Your input"
+let inputView
+  (code : string -> string)
+  (changeInput : string -> unit)
+  (currentInput : string)
+  (changeResult : string -> unit)
+  (currentResult : string) =
+
+  Html.div [
+    prop.children [
+      Html.form [
+        Bulma.field.div [
+          Bulma.label "Run code"
+          Bulma.control.div [
+            Bulma.input.text [
+              prop.required true
+              prop.placeholder "Your input"
+              prop.onTextChange <| fun v -> changeInput v
+            ]
+          ]
         ]
-      ]
-    ]
-    Bulma.field.div [
-      field.isGrouped
-      field.isGroupedCentered
-      prop.children [
-        Bulma.control.div [
-          Bulma.button.button [
-            color.isLink
-            prop.text "Submit"
+
+        Bulma.field.div [
+          field.isGrouped
+          field.isGroupedCentered
+          prop.children [
+            Bulma.control.div [
+              Bulma.button.button [
+                color.isLink
+                prop.text "Submit"
+                prop.onClick <| fun e ->
+                  e.preventDefault()
+                  let result = (code currentInput)
+                  changeResult result
+              ]
+            ]
           ]
         ]
       ]
+
+      Html.p currentResult
     ]
   ]
 
-let codeView (problem : Problem option) =
-  let partContent (codeSnippet : string) =
+let codeView
+  (problem : Problem option)
+  (changePart1Input : string -> unit)
+  (currentPart1Input : string)
+  (changePart2Input : string -> unit)
+  (currentPart2Input : string)
+  (changePart1Result : string -> unit)
+  (currentPart1Result : string)
+  (changePart2Result : string -> unit)
+  (currentPart2Result : string) = 
+  let partContent
+    (codeSnippet : string)
+    (code : string -> string)
+    (part : int) =
     Html.div [
       prop.style [ style.display.flex ]
       prop.children [
@@ -101,7 +131,21 @@ let codeView (problem : Problem option) =
           ]
 
           prop.children [
-            inputView ()
+            if part = 1
+            then
+              inputView
+                code
+                changePart1Input
+                currentPart1Input
+                changePart1Result
+                currentPart1Result
+            else
+              inputView
+                code
+                changePart2Input
+                currentPart2Input
+                changePart2Result
+                currentPart2Result
           ]
         ]
         Html.div [
@@ -124,7 +168,7 @@ let codeView (problem : Problem option) =
       ]
 
       match problem with
-      | Some p -> partContent (p.Part1Code)
+      | Some p -> partContent (p.Part1Code) (p.Part1Solution) 1
       | None -> ()
 
       Divider.divider [
@@ -132,7 +176,7 @@ let codeView (problem : Problem option) =
       ]
 
       match problem with
-      | Some p -> partContent (p.Part2Code)
+      | Some p -> partContent (p.Part2Code) (p.Part2Solution) 2
       | None -> ()
     ]
   ]
@@ -199,7 +243,9 @@ let explanationView (problem : Problem option) =
     ]
   ]
 
-let tabView (changeTab : Tab -> unit) (currentTab : Tab) =
+let tabView
+  (changeTab : Tab -> unit)
+  (currentTab : Tab) =
   Bulma.tabs [
     tabs.isBoxed
     prop.children [
@@ -240,6 +286,10 @@ let tabView (changeTab : Tab -> unit) (currentTab : Tab) =
 type AppState = {
   Day : int
   Tab : Tab
+  Part1Input : string
+  Part2Input : string
+  Part1Result : string
+  Part2Result : string
 }
 
 let App = FunctionComponent.Of<AppState> (fun model ->
@@ -252,10 +302,22 @@ let App = FunctionComponent.Of<AppState> (fun model ->
       | x when x > 25 -> 25
       | x -> x
 
-    state.update { state.current with Day = newValue }
+    state.update { state.current with Day = newValue; Part1Result = ""; Part2Result = "" }
 
   let changeTab t =
     state.update { state.current with Tab = t }
+
+  let changePart1Input i =
+    state.update { state.current with Part1Input = i }
+
+  let changePart2Input i =
+    state.update { state.current with Part2Input = i }
+
+  let changePart1Result r =
+    state.update { state.current with Part1Result = r }
+
+  let changePart2Result r =
+    state.update { state.current with Part2Result = r }
 
   let problems =
     Map.empty
@@ -276,7 +338,17 @@ let App = FunctionComponent.Of<AppState> (fun model ->
           tabView changeTab state.current.Tab
 
           match state.current.Tab with
-          | Code -> codeView (currentProblem ())
+          | Code ->
+            codeView
+              (currentProblem ())
+              changePart1Input
+              state.current.Part1Input
+              changePart2Input
+              state.current.Part2Input
+              changePart1Result
+              state.current.Part1Result
+              changePart2Result
+              state.current.Part2Result
           | Problem -> problemView (currentProblem ())
           | Explanation -> explanationView (currentProblem ())
         ]
@@ -287,7 +359,14 @@ let App = FunctionComponent.Of<AppState> (fun model ->
 
 let render() =
   ReactDom.render(
-    App { Day = 1; Tab = Code },
+    App {
+      Day = 1
+      Tab = Code
+      Part1Input = ""
+      Part2Input = ""
+      Part1Result = ""
+      Part2Result = ""
+    },
     document.getElementById("ReactEntryPoint"))
 
 render()
