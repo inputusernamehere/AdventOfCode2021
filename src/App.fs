@@ -80,6 +80,7 @@ let inputView
             Bulma.input.text [
               prop.required true
               prop.placeholder "Your input"
+              prop.value currentInput
               prop.onTextChange <| fun v -> changeInput v
             ]
           ]
