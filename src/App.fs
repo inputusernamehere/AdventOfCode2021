@@ -72,12 +72,15 @@ let inputView
   (currentResult : string) =
 
   Html.div [
+    prop.style [
+      style.marginRight (length.em 1)
+    ]
     prop.children [
       Html.form [
         Bulma.field.div [
           Bulma.label "Run code"
           Bulma.control.div [
-            Bulma.input.text [
+            Bulma.textarea [
               prop.required true
               prop.placeholder "Your input"
               prop.value currentInput
@@ -151,7 +154,7 @@ let codeView
         ]
         Html.div [
           prop.style [
-            style.height 200
+            style.minHeight 200
             style.flexGrow 1
           ]
 
