@@ -28,13 +28,16 @@ let dayBoxStyle = fss [
 
 let dayView (changeDayFn : int -> unit) (currentDay : int) =
   let dayBox (i : int) =
-    let color () =
-      if currentDay = i
-      then color.isInfo
-      else color.isWhite
     Bulma.button.button [
       prop.className dayBoxStyle
-      color ()
+
+      prop.style [
+        if currentDay = i
+        then
+          style.backgroundColor.white
+          style.color "#0a0a0a"
+        else style.backgroundColor "#0f0f23"
+      ]
 
       prop.text (string i)
 
@@ -332,6 +335,11 @@ let App = FunctionComponent.Of<AppState> (fun model ->
     |> Map.tryFind state.current.Day
 
   Bulma.section [
+    prop.style [
+      //style.backgroundColor "#0f0f23"
+      //style.color "#cccccc"
+      //style.fontFamily "Source Code Pro"
+    ]
     prop.children [
       Bulma.container [
         prop.children [
