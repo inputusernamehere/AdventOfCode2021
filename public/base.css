@@ -25,8 +25,20 @@ html, body, textarea, .textarea, .divider, .label, .tabs a, .title, .subtitle, .
   border-color: #0f0f23;
 }
 
-.tabs li.is-active a {
+.tabs.is-boxed li.is-active a {
   color: #0a0a0a;
+  background-color: #485fc7;
+  border: none;
+}
+
+.tabs.is-boxed a {
+  border: none;
+}
+
+.tabs.is-boxed a:hover {
+  color: inherit;
+  background-color: inherit;
+  border: none;
 }
 
 .button.is-focused:not(:active), .button:focus:not(:active) {

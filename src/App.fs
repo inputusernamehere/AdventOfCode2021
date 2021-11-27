@@ -34,7 +34,7 @@ let dayView (changeDayFn : int -> unit) (currentDay : int) =
       prop.style [
         if currentDay = i
         then
-          style.backgroundColor.white
+          style.backgroundColor "#485fc7"
           style.color "#0a0a0a"
         else style.backgroundColor "#0f0f23"
       ]
@@ -110,7 +110,10 @@ let inputView
         ]
       ]
 
-      Html.p currentResult
+      Html.p [
+        if currentResult <> ""
+        then prop.text ("Answer: " + currentResult)
+      ]
     ]
   ]
 
