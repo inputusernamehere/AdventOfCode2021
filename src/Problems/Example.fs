@@ -2,7 +2,7 @@ module Example
 
 open System
 
-open Problem
+open BaseTypes
 
 let part1Problem =
   """
@@ -41,7 +41,7 @@ let part1Explanation =
   """
     .Trim()
 
-let part1Solution (input : string) =
+let part1Code (input : string) =
     let split (s : string) =
         s.Split(Environment.NewLine)
         |> List.ofArray
@@ -62,7 +62,7 @@ let part1Solution (input : string) =
     |> List.reduce (*)
     |> string
 
-let part1Code =
+let part1CodeString =
   """
 let part1Solution (input : string) =
     let split (s : string) =
@@ -103,7 +103,7 @@ let part2Explanation =
   """
     .Trim()
 
-let part2Solution (input : string) =
+let part2Code (input : string) =
     let split (s : string) =
         s.Split(Environment.NewLine)
         |> List.ofArray
@@ -134,7 +134,7 @@ let part2Solution (input : string) =
     |> List.reduce (*)
     |> string
 
-let part2Code =
+let part2CodeString =
   """
 let part2Solution (input : string) =
     let split (s : string) =
@@ -172,11 +172,11 @@ let part2Solution (input : string) =
 let example = {
   Day = 1
 
-  Part1Solution = part1Solution
-  Part2Solution = part2Solution
-
   Part1Code = part1Code
   Part2Code = part2Code
+
+  Part1CodeString = part1CodeString
+  Part2CodeString = part2CodeString
 
   Part1Problem = part1Problem
   Part2Problem = part2Problem
