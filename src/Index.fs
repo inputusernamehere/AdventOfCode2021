@@ -25,7 +25,32 @@ open TabView
 let init () =
   let problems =
     Map.empty
-      .Add(Example.example.Day, Example.example)
+      //.Add(Example.example.Day, Example.example)
+      .Add(Day1.data.Day, Day1.data)
+      .Add(Day2.data.Day, Day2.data)
+      .Add(Day3.data.Day, Day3.data)
+      .Add(Day4.data.Day, Day4.data)
+      .Add(Day5.data.Day, Day5.data)
+      .Add(Day6.data.Day, Day6.data)
+      .Add(Day7.data.Day, Day7.data)
+      .Add(Day8.data.Day, Day8.data)
+      .Add(Day9.data.Day, Day9.data)
+      .Add(Day10.data.Day, Day10.data)
+      .Add(Day11.data.Day, Day11.data)
+      .Add(Day12.data.Day, Day12.data)
+      .Add(Day13.data.Day, Day13.data)
+      .Add(Day14.data.Day, Day14.data)
+      .Add(Day15.data.Day, Day15.data)
+      .Add(Day16.data.Day, Day16.data)
+      .Add(Day17.data.Day, Day17.data)
+      .Add(Day18.data.Day, Day18.data)
+      .Add(Day19.data.Day, Day19.data)
+      .Add(Day20.data.Day, Day20.data)
+      .Add(Day21.data.Day, Day21.data)
+      .Add(Day22.data.Day, Day22.data)
+      .Add(Day23.data.Day, Day23.data)
+      .Add(Day24.data.Day, Day24.data)
+      .Add(Day25.data.Day, Day25.data)
 
   let initialState = {
     Day = 1
@@ -36,6 +61,8 @@ let init () =
     Inputs = Map.empty
     Answers = Map.empty
   }
+
+  //problems |> Map.iter (fun k v -> printfn "Problem: %i" k)
 
   initialState, Cmd.none
 

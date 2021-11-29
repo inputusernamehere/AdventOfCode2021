@@ -1,5 +1,6 @@
 module SyntaxHighlighterWrapper
 
+open System
 open Fable.Core.JsInterop
 open Feliz
 
@@ -18,9 +19,18 @@ type SyntaxHighlighter =
   static member inline style (s : obj) = prop.custom ("style", s)
   static member inline input props = Interop.reactApi.createElement (syntaxHighlighter, createObj !!props)
 
-let fsSnippet (snippet : string) =
+type Language =
+  | OCaml
+  | FSharp
+
+let snippet (language : Language) (snippet : string) =
+  let languageString =
+    match language with
+    | OCaml -> "ocaml"
+    | FSharp -> "fsharp"
+
   SyntaxHighlighter.input [
-    SyntaxHighlighter.language "fsharp"
+    SyntaxHighlighter.language languageString
     SyntaxHighlighter.showLineNumbers true
 
     SyntaxHighlighter.style vs2015
@@ -30,3 +40,5 @@ let fsSnippet (snippet : string) =
     ]
   ]
 
+let fsSnippet = snippet FSharp
+let ocamlSnipper = snippet OCaml

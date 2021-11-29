@@ -25,31 +25,35 @@ let codeView model dispatch =
   let partContent
     (codeSnippet : string)
     (part : int) =
-    Html.div [
-      prop.style [ style.display.flex ]
-      prop.children [
-        Html.div [
-          prop.style [
-            style.flexBasis (length.em 20)
-            style.flexShrink 0
-          ]
+    if codeSnippet = ""
+    then
+      Html.div []
+    else
+      Html.div [
+        prop.style [ style.display.flex ]
+        prop.children [
+          Html.div [
+            prop.style [
+              style.flexBasis (length.em 20)
+              style.flexShrink 0
+            ]
 
-          prop.children [
-            inputView part model dispatch
+            prop.children [
+              inputView part model dispatch
+            ]
           ]
-        ]
-        Html.div [
-          prop.style [
-            style.minHeight 200
-            style.flexGrow 1
-          ]
+          Html.div [
+            prop.style [
+              style.minHeight 200
+              style.flexGrow 1
+            ]
 
-          prop.children [
-            fsSnippet codeSnippet
+            prop.children [
+              fsSnippet codeSnippet
+            ]
           ]
         ]
       ]
-    ]
 
   Html.div [
     prop.children [
