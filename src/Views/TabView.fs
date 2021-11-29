@@ -29,6 +29,8 @@ let tabView model dispatch =
       Html.ul [
         prop.style [
           style.display.flex
+          style.listStyleType.none
+          style.padding 0
         ]
 
         prop.children [
