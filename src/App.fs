@@ -28,8 +28,8 @@ open Elmish.HMR
 open Fable.Core.JsInterop
 #endif
 
-importAll "../public/lights.scss"
-importAll "../public/snowflake.scss"
+importAll "./styling/lights.scss"
+importAll "./styling/snowflake.scss"
 
 Program.mkProgram Index.init Index.update Index.view
 #if DEBUG
