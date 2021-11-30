@@ -1,0 +1,136 @@
+$green: #24D024;
+$yellow: #fff952;
+$pink: #f53896;
+$red: #fb4545;
+$blue: #0A53DE;
+
+.line{
+  text-align: center; 
+}
+
+.line-item {
+    position: relative;
+    margin: 0 15px;
+    list-style: none;
+    padding: 0;
+    display: inline-block;
+    width: 12px;
+    height: 28px;
+    border-radius: 50%;
+    top: 35px;
+    background: #fff;
+    &:before {
+        content: "";
+        position: absolute;
+        background: #222;
+        width: 10px;
+        height: 9px;
+        border-radius: 3px;
+        top: -4px;
+        left: 1px;
+    }
+    &:after {
+        content: "";
+        top: -14px;
+        left: 9px;
+        position: absolute;
+        width: 52px;
+        height: 19px;
+        border-bottom: solid #222 2px;
+        border-radius: 30%;
+    }
+}
+
+.red {
+    background-color: $red;
+    animation: lightningRed 1s infinite;
+}
+
+.green {
+    background-color: $green;
+    animation: lightningGreen 0.8s infinite;
+}
+
+.yellow {
+    background-color: $yellow;
+    animation: lightningYellow 0.9s infinite;
+}
+
+.blue {
+    background-color: $blue;
+    animation: lightningBlue 1.1s infinite;
+}
+
+.pink {
+    background-color: $pink;
+    animation: lightningPink 1.2s infinite;
+}
+
+@keyframes lightningRed {
+    0% {
+        box-shadow: 5px 10px 35px 10px $red;
+    }
+    50% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 5px 10px 35px 10px $red;
+    }
+}
+
+@keyframes lightningGreen {
+    0% {
+        box-shadow: 5px 0 35px 10px $green;
+    }
+    50% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 5px 0 35px 10px $green;
+    }
+}
+
+@keyframes lightningYellow {
+    0% {
+        box-shadow: 5px 0 35px 10px $yellow;
+    }
+    50% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 5px 0 35px 10px $yellow;
+    }
+}
+
+@keyframes lightningBlue {
+    0% {
+        box-shadow: 5px 0 35px 10px $blue;
+    }
+    50% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 5px 0 35px 10px $blue;
+    }
+}
+
+@keyframes lightningPink {
+    0% {
+        box-shadow: 5px 0 35px 10px $pink;
+    }
+    50% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 5px 0 35px 10px $pink;
+    }
+}
+
+@media (max-width: 1024px) {
+  .line{
+    padding: 0; 
+  }
+    .line-item {
+        margin: 0 15px 20px 15px;
+    }
+}

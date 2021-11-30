@@ -19,6 +19,7 @@ let dayBoxStyle = fss [
   Width.value (px 40)
   BorderWidth.value (px 0)
   BorderRadius.value (px 4)
+  BackgroundColor.rgb 21 21 21
   Color.white
 ]
 
@@ -31,10 +32,7 @@ let dayView (model : Model) dispatch =
         style.color.white
 
         if model.Day = i
-        then
-          style.backgroundColor "#485fc7"
-        else
-          style.backgroundColor "#0f0f23"
+        then style.backgroundColor "#485fc7"
       ]
 
       prop.text (string i)

@@ -20,6 +20,7 @@ let tabButtonStyle = fss [
   PaddingRight.value (em 1.0)
   BorderWidth.value (px 0)
   BorderRadius.value (px 4)
+  BackgroundColor.rgb 21 21 21
   Color.white
 ]
 
@@ -40,10 +41,7 @@ let tabView model dispatch =
 
               prop.style [
                 if model.Tab = Code
-                then
-                  style.backgroundColor "#485fc7"
-                else
-                  style.backgroundColor "#0f0f23"
+                then style.backgroundColor "#485fc7"
               ]
               prop.text "Code"
               prop.onClick <| fun _ -> dispatch (ChangeTab Code)
@@ -56,10 +54,7 @@ let tabView model dispatch =
 
               prop.style [
                 if model.Tab = Problem
-                then
-                  style.backgroundColor "#485fc7"
-                else
-                  style.backgroundColor "#0f0f23"
+                then style.backgroundColor "#485fc7"
               ]
               prop.text "Problem"
               prop.onClick <| fun _ -> dispatch (ChangeTab Problem)
@@ -72,10 +67,7 @@ let tabView model dispatch =
 
               prop.style [
                 if model.Tab = Explanation
-                then
-                  style.backgroundColor "#485fc7"
-                else
-                  style.backgroundColor "#0f0f23"
+                then style.backgroundColor "#485fc7"
               ]
               prop.text "Explanation"
               prop.onClick <| fun _ -> dispatch (ChangeTab Explanation)

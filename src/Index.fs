@@ -100,6 +100,41 @@ let update msg (model : Model) =
     | None ->
       model, Cmd.none
 
+let lights () =
+  Html.div [
+    prop.className "lights"
+
+    prop.children [
+      Html.ul [
+        prop.className "line"
+
+        prop.children [
+          Html.li [ prop.classes [ "line-item"; "red"] ]
+          Html.li [ prop.classes [ "line-item"; "yellow"] ]
+          Html.li [ prop.classes [ "line-item"; "blue"] ]
+          Html.li [ prop.classes [ "line-item"; "pink"] ]
+          Html.li [ prop.classes [ "line-item"; "red"] ]
+          Html.li [ prop.classes [ "line-item"; "green"] ]
+          Html.li [ prop.classes [ "line-item"; "blue"] ]
+          Html.li [ prop.classes [ "line-item"; "yellow"] ]
+          Html.li [ prop.classes [ "line-item"; "red"] ]
+          Html.li [ prop.classes [ "line-item"; "pink"] ]
+          Html.li [ prop.classes [ "line-item"; "green"] ]
+          Html.li [ prop.classes [ "line-item"; "yellow"] ]
+          Html.li [ prop.classes [ "line-item"; "blue"] ]
+          Html.li [ prop.classes [ "line-item"; "red"] ]
+          Html.li [ prop.classes [ "line-item"; "pink"] ]
+          Html.li [ prop.classes [ "line-item"; "yellow"] ]
+          Html.li [ prop.classes [ "line-item"; "pink"] ]
+          Html.li [ prop.classes [ "line-item"; "blue"] ]
+          Html.li [ prop.classes [ "line-item"; "red"] ]
+          Html.li [ prop.classes [ "line-item"; "green"] ]
+          Html.li [ prop.classes [ "line-item"; "blue"] ]
+        ]
+      ]
+    ]
+  ]
+
 let view (model : Model) (dispatch : Msg -> unit) =
   let snowflake = Html.div [ prop.className "snowflake"; prop.text "❅" ]
 
@@ -111,6 +146,8 @@ let view (model : Model) (dispatch : Msg -> unit) =
     ]
 
     prop.children [
+      lights ()
+
       Html.h1 [
         prop.style [
           style.fontFamily "ThePerfectChristmas"

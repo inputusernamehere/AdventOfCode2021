@@ -1,6 +1,6 @@
 html, body {
   height: 100%;
-  background-color: #0f0f23;
+  background-color: rgb(21, 21, 21);
   font-family: "Storytime";
   font-size: 1.2em;
   color: white;
@@ -9,6 +9,10 @@ html, body {
 
 button {
   outline: none;
+}
+
+.is-active {
+  background-color: repeating-linear-gradient(-45deg, #9C2929 0, #9C2929 12px, transparent 0, transparent 12px, #08874F 12px, #08874F 24px, transparent 0, transparent 12px)
 }
 
 @font-face {
