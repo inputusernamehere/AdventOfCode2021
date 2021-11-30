@@ -2,17 +2,37 @@ html, body {
   height: 100%;
   background-color: rgb(21, 21, 21);
   font-family: "Storytime";
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: white;
-  overflow: hidden;
 }
 
 button {
   outline: none;
 }
 
+.tab-button {
+  background-color: rgb(21, 21, 21);
+  color: white;
+  height: 40px;
+  padding-left: 1em;
+  padding-right: 1em;
+  box-sizing: border-box;
+  border: 5px solid transparent;
+}
+
+.day-button {
+  background-color: rgb(21, 21, 21);
+  color: white;
+  height: 40px;
+  padding-left: 1em;
+  padding-right: 1em;
+  box-sizing: border-box;
+  border: 5px solid transparent;
+  border-radius: 10px;
+}
+
 .is-active {
-  background-color: repeating-linear-gradient(-45deg, #9C2929 0, #9C2929 12px, transparent 0, transparent 12px, #08874F 12px, #08874F 24px, transparent 0, transparent 12px)
+  border-image: 5 repeating-linear-gradient(-45deg, #9C2929 0, #9C2929 12px, transparent 0, transparent 12px, #08874F 12px, #08874F 24px, transparent 0, transparent 12px);
 }
 
 @font-face {
@@ -28,13 +48,12 @@ button {
 #snow-blur {
     box-shadow: 0px 0px 15px 30px #FFF, inset 0px 0px 5px 3px #FFF;
     -webkit-box-shadow: 0px 0px 15px 30px #FFF, inset 0px 0px 5px 3px #FFF;
-    position: absolute;
+    position: fixed;
     left: -1vw;
     right: -1vw;
     top: -10vh;
-    bottom: 0;
+    bottom: 10px;
     z-index: 9999;
-    height: 109vh;
     border-radius: 60px;
     pointer-events: none
 }

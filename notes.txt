@@ -1,1 +1,5 @@
 Styling inspiration: https://github.com/Manlibear/AdventOfCode2021
+
+Snowflakes: https://codepen.io/alvaromontoro/pen/GRNmdzB
+
+Lights: https://codepen.io/maureenhdd/pen/yLJEzGq

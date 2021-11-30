@@ -3,7 +3,7 @@
   font-size: var(--size);
   color: white;
   border-radius: 50%;
-  position: absolute;
+  position: fixed;
   top: -5vh;
 }
 
@@ -21,7 +21,7 @@
     --size: #{random(5) * 0.5}vw;
     --left-ini: #{random(20) - 10}vw;
     --left-end: #{random(20) - 10}vw;
-    left: #{random(100)}vw;
+    left: #{random(90) + 5}vw;
     animation: snowfall #{5 + random(10)}s linear infinite;
     animation-delay: -#{random(10)}s;
   }

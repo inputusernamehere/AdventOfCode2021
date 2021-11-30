@@ -14,16 +14,6 @@ open Browser.Dom
 
 open BaseTypes
 
-let tabButtonStyle = fss [
-  Height.value (px 40)
-  PaddingLeft.value (em 1.0)
-  PaddingRight.value (em 1.0)
-  BorderWidth.value (px 0)
-  BorderRadius.value (px 4)
-  BackgroundColor.rgb 21 21 21
-  Color.white
-]
-
 let tabView model dispatch =
   Html.div [
     prop.children [
@@ -37,12 +27,10 @@ let tabView model dispatch =
         prop.children [
           Html.li [
             Html.button [
-              prop.className tabButtonStyle
+              if model.Tab = Code
+              then prop.className "tab-button is-active"
+              else prop.className "tab-button"
 
-              prop.style [
-                if model.Tab = Code
-                then style.backgroundColor "#485fc7"
-              ]
               prop.text "Code"
               prop.onClick <| fun _ -> dispatch (ChangeTab Code)
             ]
@@ -50,12 +38,10 @@ let tabView model dispatch =
 
           Html.li [
             Html.button [
-              prop.className tabButtonStyle
+              if model.Tab = Problem
+              then prop.className "tab-button is-active"
+              else prop.className "tab-button"
 
-              prop.style [
-                if model.Tab = Problem
-                then style.backgroundColor "#485fc7"
-              ]
               prop.text "Problem"
               prop.onClick <| fun _ -> dispatch (ChangeTab Problem)
             ]
@@ -63,12 +49,10 @@ let tabView model dispatch =
 
           Html.li [
             Html.button [
-              prop.className tabButtonStyle
+              if model.Tab = Explanation
+              then prop.className "tab-button is-active"
+              else prop.className "tab-button"
 
-              prop.style [
-                if model.Tab = Explanation
-                then style.backgroundColor "#485fc7"
-              ]
               prop.text "Explanation"
               prop.onClick <| fun _ -> dispatch (ChangeTab Explanation)
             ]
