@@ -4,6 +4,7 @@ html, body {
   font-family: "Storytime";
   font-size: 1.2em;
   color: white;
+  overflow: hidden;
 }
 
 button {
@@ -18,4 +19,18 @@ button {
 @font-face {
     font-family: 'ThePerfectChristmas';
     src: url('./ThePerfectChristmas.ttf') format('truetype');
+}
+
+#snow-blur {
+    box-shadow: 0px 0px 15px 30px #FFF, inset 0px 0px 5px 3px #FFF;
+    -webkit-box-shadow: 0px 0px 15px 30px #FFF, inset 0px 0px 5px 3px #FFF;
+    position: absolute;
+    left: -1vw;
+    right: -1vw;
+    top: -10vh;
+    bottom: 0;
+    z-index: 9999;
+    height: 109vh;
+    border-radius: 60px;
+    pointer-events: none
 }

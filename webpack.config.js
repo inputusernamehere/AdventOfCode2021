@@ -5,16 +5,29 @@
 var path = require("path");
 
 module.exports = {
-    mode: "development",
-    entry: "./src/App.fs.js",
-    output: {
-        path: path.join(__dirname, "./public"),
-        filename: "bundle.js",
-    },
-    devServer: {
-        static: "./public",
-        port: 8080,
-    },
-    module: {
-    }
+  mode: "development",
+  entry: "./src/App.fs.js",
+  output: {
+    path: path.join(__dirname, "./public"),
+    filename: "bundle.js",
+  },
+  devServer: {
+    static: "./public",
+    port: 8080,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          "style-loader",
+          // Translates CSS into CommonJS
+          "css-loader",
+          // Compiles Sass to CSS
+          "sass-loader",
+        ],
+      },
+    ],
+  }
 }

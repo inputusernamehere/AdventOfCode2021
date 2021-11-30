@@ -101,6 +101,8 @@ let update msg (model : Model) =
       model, Cmd.none
 
 let view (model : Model) (dispatch : Msg -> unit) =
+  let snowflake = Html.div [ prop.className "snowflake"; prop.text "❅" ]
+
   Html.div [
     prop.style [
       style.paddingRight (length.rem 3.0)
@@ -127,5 +129,9 @@ let view (model : Model) (dispatch : Msg -> unit) =
       | Code -> codeView model dispatch
       | Problem -> problemView model dispatch
       | Explanation -> explanationView model dispatch
+
+      for _ in [ 1 .. 50 ] do snowflake
+
+      Html.div [ prop.id "snow-blur" ]
     ]
   ]
