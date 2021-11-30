@@ -1,10 +1,21 @@
 html, body {
   height: 100%;
   background-color: #0f0f23;
-  font-family: "Source Code Pro";
+  font-family: "Storytime";
+  font-size: 1.2em;
   color: white;
 }
 
 button {
   outline: none;
+}
+
+@font-face {
+    font-family: 'Storytime';
+    src: url('./Storytime.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'ThePerfectChristmas';
+    src: url('./ThePerfectChristmas.ttf') format('truetype');
 }

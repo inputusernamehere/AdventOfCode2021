@@ -111,7 +111,9 @@ let view (model : Model) (dispatch : Msg -> unit) =
     prop.children [
       Html.h1 [
         prop.style [
-          style.fontSize (length.rem 3)
+          style.fontFamily "ThePerfectChristmas"
+          style.fontWeight 500
+          style.fontSize (length.em 6)
         ]
 
         prop.text "Advent of Code 2021"

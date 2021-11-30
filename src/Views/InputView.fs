@@ -46,6 +46,7 @@ let inputView part model dispatch =
 
           Html.textarea [
             prop.style [
+              style.fontFamily "Source Code Pro"
               style.backgroundColor "rgb(30, 30, 30)"
               style.color.white
               style.height (length.rem 8)
