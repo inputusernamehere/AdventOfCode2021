@@ -31,6 +31,9 @@ type Problem = {
 
   Part1Explanation : string
   Part2Explanation : string
+
+  Part1Language : SyntaxHighlighterWrapper.Language
+  Part2Language : SyntaxHighlighterWrapper.Language
 }
 
 type Model = {

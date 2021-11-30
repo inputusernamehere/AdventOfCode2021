@@ -2,6 +2,7 @@ module Example
 
 open System
 
+open SyntaxHighlighterWrapper
 open BaseTypes
 
 let part1Problem =
@@ -183,4 +184,7 @@ let example = {
 
   Part1Explanation = part1Explanation
   Part2Explanation = part2Explanation
+
+  Part1Language = FSharp
+  Part2Language = FSharp
 }

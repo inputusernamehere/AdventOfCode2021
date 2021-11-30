@@ -1,5 +1,7 @@
 module Day2
 
+open SyntaxHighlighterWrapper
+
 let part1Code (input : string) =
   ""
 
@@ -52,4 +54,7 @@ let data = {
 
   Part1Explanation = part1Explanation
   Part2Explanation = part2Explanation
+
+  Part1Language = OCaml
+  Part2Language = OCaml
 }
