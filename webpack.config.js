@@ -12,7 +12,7 @@ module.exports = {
     filename: "bundle.js",
   },
   devServer: {
-    static: "./public",
+    static: "./docs",
     port: 8080,
   },
   module: {
