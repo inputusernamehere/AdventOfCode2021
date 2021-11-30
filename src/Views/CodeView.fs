@@ -24,6 +24,7 @@ let codeView model dispatch =
 
   let partContent
     (codeSnippet : string)
+    (language : Language)
     (part : int) =
     if codeSnippet = ""
     then
@@ -49,7 +50,7 @@ let codeView model dispatch =
             ]
 
             prop.children [
-              fsSnippet codeSnippet
+              snippet language codeSnippet
             ]
           ]
         ]
@@ -62,7 +63,7 @@ let codeView model dispatch =
       ]
 
       match problem with
-      | Some p -> partContent (p.Part1CodeString) 1
+      | Some p -> partContent (p.Part1CodeString) (p.Part1Language) 1
       | None -> ()
 
       Divider.divider [
@@ -70,7 +71,7 @@ let codeView model dispatch =
       ]
 
       match problem with
-      | Some p -> partContent (p.Part2CodeString) 2
+      | Some p -> partContent (p.Part2CodeString) (p.Part2Language) 2
       | None -> ()
     ]
   ]
