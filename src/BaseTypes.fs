@@ -3,7 +3,7 @@ module BaseTypes
 type Tab =
   | Code
   | Problem
-  | Explanation
+  //| Explanation
 
 type Section = {
   Day : int

@@ -1,3 +1,5 @@
+notebooks/
+
 # Fable generated files
 .fable
 *.fs.js

@@ -28,7 +28,6 @@ button {
   padding-right: 1em;
   box-sizing: border-box;
   border: 5px solid transparent;
-  border-radius: 10px;
 }
 
 .is-active {

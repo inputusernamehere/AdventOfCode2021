@@ -47,6 +47,7 @@ let tabView model dispatch =
             ]
           ]
 
+          (*
           Html.li [
             Html.button [
               if model.Tab = Explanation
@@ -57,6 +58,7 @@ let tabView model dispatch =
               prop.onClick <| fun _ -> dispatch (ChangeTab Explanation)
             ]
           ]
+          *)
         ]
       ]
     ]

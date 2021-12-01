@@ -25,8 +25,8 @@ open TabView
 let init () =
   let problems =
     Map.empty
-      .Add(Example.example.Day, Example.example)
-      //.Add(Day1.data.Day, Day1.data)
+      //.Add(Example.example.Day, Example.example)
+      .Add(Day1.data.Day, Day1.data)
       .Add(Day2.data.Day, Day2.data)
       .Add(Day3.data.Day, Day3.data)
       .Add(Day4.data.Day, Day4.data)
@@ -93,8 +93,8 @@ let update msg (model : Model) =
     | Some c ->
       let answer =
         if section.Part = 1
-        then c.Part1Code input
-        else c.Part2Code input
+        then c.Part1Code (input.Trim())
+        else c.Part2Code (input.Trim())
       
       model, Cmd.ofMsg (UpdateAnswer (section, answer))
     | None ->
@@ -166,7 +166,7 @@ let view (model : Model) (dispatch : Msg -> unit) =
       match model.Tab with
       | Code -> codeView model dispatch
       | Problem -> problemView model dispatch
-      | Explanation -> explanationView model dispatch
+      //| Explanation -> explanationView model dispatch
 
       for _ in [ 1 .. 50 ] do snowflake
 
