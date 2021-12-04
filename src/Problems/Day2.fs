@@ -82,7 +82,7 @@ let part1Explanation =
 
 let part2Code (input : string) =
   let folder (distance, depth, aim) (item : string array) =
-    match item.[0], int (item.[1]) with
+    match item.[0], int item.[1] with
     | opcode, speed when opcode = "forward" ->
       (distance + speed, depth + (speed * aim), aim)
     | opcode, speed when opcode = "down" ->
@@ -93,14 +93,14 @@ let part2Code (input : string) =
   (input.Split(Environment.NewLine))
   |> Array.map (fun line -> line.Split())
   |> Array.fold folder (0, 0, 0)
-  |> (fun (distance, depth, _) -> distance * depth)
+  |> fun (distance, depth, _) -> distance * depth
   |> string
 
 let part2CodeString =
   """
 let part2Code (input : string) =
   let folder (distance, depth, aim) (item : string array) =
-    match item.[0], int (item.[1]) with
+    match item.[0], int item.[1] with
     | opcode, speed when opcode = "forward" ->
       (distance + speed, depth + (speed * aim), aim)
     | opcode, speed when opcode = "down" ->
@@ -111,7 +111,7 @@ let part2Code (input : string) =
   (input.Split(Environment.NewLine))
   |> Array.map (fun line -> line.Split())
   |> Array.fold folder (0, 0, 0)
-  |> (fun (distance, depth, _) -> distance * depth)
+  |> fun (distance, depth, _) -> distance * depth
   |> string
   """
     .Trim()
