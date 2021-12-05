@@ -1,3 +1,5 @@
+See the website in action: https://inputusernamehere.github.io/AdventOfCode2021/
+
 # Fable Minimal App
 
 This is a small Fable app project so you can easily get started and add your own code progressively. For more comprehensive templates [check this page](https://fable.io/docs/2-steps/your-first-fable-project.html).
