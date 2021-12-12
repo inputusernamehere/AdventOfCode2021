@@ -1,28 +1,27 @@
 module Day10
 
 open System
-open System.Collections.Generic
 open SyntaxHighlighterWrapper
 
 let part1Code (input : string) =
   let left = [|'['; '('; '{'; '<'|]
   let right = [|']'; ')'; '}'; '>'|]
 
-  let rec scoreLine (stack : Stack<char>) sum line =
+  let rec scoreLine stack sum line =
     match line with
     | [] -> sum
     | x :: xs ->
       match x with
       | l when (Array.contains l left) ->
-        stack.Push(l)
-        scoreLine stack sum xs
+        scoreLine (l :: stack) sum xs
       | r when (Array.contains r right) ->
-        let top = stack.Pop()
+        let top = List.head stack
+
         let topIndex = Array.IndexOf(left, top)
         let rIndex = Array.IndexOf(right, r)
 
         if topIndex = rIndex
-        then scoreLine stack sum xs
+        then scoreLine (List.tail stack) sum xs
         else
           let score =
             match r with
@@ -30,11 +29,11 @@ let part1Code (input : string) =
             | ']' -> 57
             | '}' -> 1197
             | '>' -> 25137
-          scoreLine stack (sum + score) xs
+          scoreLine (List.tail stack) (sum + score) xs
 
   (input.Split(Environment.NewLine))
   |> Array.map Seq.toList
-  |> Array.map (scoreLine (new Stack<char>()) 0)
+  |> Array.map (scoreLine [] 0)
   |> Array.sum
   |> string
   
@@ -145,12 +144,12 @@ let part2Code (input : string) =
   let left = [|'['; '('; '{'; '<'|]
   let right = [|']'; ')'; '}'; '>'|]
 
-  let rec calculateScore (stack : Stack<char>) sum =
-    match stack.Count with
+  let rec calculateScore stack sum =
+    match List.length stack with
     | 0 ->
       sum
     | n ->
-      let top = stack.Pop()
+      let top = List.head stack
       let score =
         match top with
         | '(' -> 1I
@@ -158,29 +157,28 @@ let part2Code (input : string) =
         | '{' -> 3I
         | '<' -> 4I
 
-      calculateScore stack ((sum * 5I) + score)
+      calculateScore (List.tail stack) ((sum * 5I) + score)
 
-  let rec scoreLine (stack : Stack<char>) line =
+  let rec scoreLine stack line =
     match line with
     | [] ->
       calculateScore stack 0I
     | x :: xs ->
       match x with
       | l when (Array.contains l left) ->
-        stack.Push(l)
-        scoreLine stack xs
+        scoreLine (l :: stack) xs
       | r when (Array.contains r right) ->
-        let top = stack.Pop()
+        let top = List.head stack
         let topIndex = Array.IndexOf(left, top)
         let rIndex = Array.IndexOf(right, r)
 
         if topIndex = rIndex
-        then scoreLine stack xs
+        then scoreLine (List.tail stack) xs
         else 0I
 
   (input.Split(Environment.NewLine))
   |> Array.map Seq.toList
-  |> Array.map (fun x -> scoreLine (new Stack<char>()) x)
+  |> Array.map (scoreLine [])
   |> Array.filter ((<>) 0I)
   |> Array.sort
   |> (fun arr ->
