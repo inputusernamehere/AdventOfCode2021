@@ -15,6 +15,12 @@ open Browser.Dom
 open BaseTypes
 
 let dayView (model : Model) dispatch =
+  let getStars day =
+    let problem = model.Problems.[day]
+    if problem.Part1CodeString <> "" && problem.Part2CodeString <> "" then "**"
+    elif problem.Part1CodeString <> "" || problem.Part2CodeString <> "" then "*"
+    else ""
+
   let dayBox (i : int) =
     Html.button [
       if model.Day = i
@@ -24,6 +30,15 @@ let dayView (model : Model) dispatch =
       prop.text (string i)
 
       prop.onClick <| fun _ -> dispatch (ChangeDay i)
+
+      prop.children [
+        Html.span (string i)
+
+        Html.span [
+          prop.className "stars"
+          prop.text (" " + (getStars i))
+        ]
+      ]
     ]
 
   let dayBoxes () =

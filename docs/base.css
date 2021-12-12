@@ -10,6 +10,11 @@ button {
   outline: none;
 }
 
+.stars {
+  font-family: "Source Code Pro";
+  color: rgb(255, 255, 102);
+}
+
 .tab-button {
   background-color: rgb(21, 21, 21);
   color: white;
